@@ -12,7 +12,7 @@ let currentUvindex= $("#uv-index");
 let sCity=[];
 // searches the city to see if it exists in the entries from the storage
 function find(c){
-    for (var i=0; i<sCity.length; i++){
+    for (let i=0; i< sCity.length; i++){
         if(c.toUpperCase()===sCity[i]){
             return -1;
         }
@@ -21,7 +21,7 @@ function find(c){
 }
 //Set up the API key
 let APIKey="af86bdf5ff77ca275e24b969af70f4c1";
-// Display the curent and future weather to the user after grabing the city form the input text box.
+// Display the curent and future weather to the user after grabbing the city form the input text box.
 function displayWeather(event){
     event.preventDefault();
     if(searchCity.val().trim()!==""){
@@ -32,7 +32,7 @@ function displayWeather(event){
 // Here we create the AJAX call
 function currentWeather(city){
     // Here we build the URL so we can get a data from server side.
-    var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
+    let queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
     $.ajax({
         url:queryURL,
         method:"GET",
@@ -40,7 +40,7 @@ function currentWeather(city){
 
         // parse the response to display the current weather including the City name. the Date and the weather icon. 
         console.log(response);
-        //Dta object from server side Api for icon property.
+        //Data object from server side Api for icon property.
         let weathericon= response.weather[0].icon;
         let iconurl="https://openweathermap.org/img/wn/"+weathericon +"@2x.png";
         // The date format method is taken from the  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
@@ -104,7 +104,7 @@ function forecast(cityid){
         method:"GET"
     }).then(function(response){
         
-        for (i=0;i<5;i++){
+        for (i=0; i < 5; i++){
             let date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
             let iconcode= response.list[((i+1)*8)-1].weather[0].icon;
             let iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
@@ -121,7 +121,7 @@ function forecast(cityid){
     });
 }
 
-//Dynamically add the passed city on the search history
+//Daynamically add the passed city on the search history
 function addToList(c){
     let listEl= $("<li>"+c.toUpperCase()+"</li>");
     $(listEl).attr("class","list-group-item");
